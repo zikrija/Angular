@@ -1,0 +1,129 @@
+﻿<!-- in form control we access through ng-model for two way bindings-->
+<!-- for two way bindings do not use ng-bind or value = {{ editableEmployee.fullName }} this is for one way binding, this two are same-->
+<!--ng-submit placed on form tag, specify a callback function usally on scope object in Controller, this will prevent default behavior of post back
+    ng-submit="submitForm()" name in parentas is with () because we call function-->
+<!--In angular we need to have name for FORM that we can reference in some point-->
+<!--novalidate - turn of browser validation, shut off to use consistent style of validation-->
+<form role="form" class="form-horizontal" name="employeeForm" novalidate>
+  <!--here we put ng-submit="submitForm()"-->
+
+  <fieldset>
+    <legend>Basic info</legend>
+
+    <!--Bootstrap class has-error or has-success ... put style on all element in div-->
+    <div class="form-group has-success">
+      <label for="fullName" class="col-sm-3 control-label">Name</label>
+      <div class="col-sm-9">
+        <!--required is HTML validation tag and we not set value on this-->
+        <!--ng-required is Angular validation tag and we can set value on this-->
+        <input type="text" id="fullName" name="fullNameVal" class="form-control" ng-model="editableEmployee.fullName" ng-required="true" />
+        <!--bootstrap help-block - style text asociated with input control -->
+        <span class="help-block" ng-show="employeeForm.fullNameVal.$error.required">Full name is required</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="notes" class="col-sm-3 control-label">Notes</label>
+      <div class="col-sm-9">
+        <!--ng-required we can set this in function-->
+        <textarea name="notes" id="notes" class="form-control" rows="5" cols="40" ng-model="editableEmployee.notes" ng-required="shouldShowValidation()"></textarea>
+        <span ng-show="employeeForm.notes.$error.required">Full name is required</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="department" class="col-sm-3 control-label">Department</label>
+      <div class="col-sm-9">
+        <!-- dept for dept in departments something like for each in departments, generate items for select tag
+          we still have two way bindigs with directive  ng-model="editableEmployee.department" -->
+        <select name="department" id="department" class="form-control" ng-model="editableEmployee.department" ng-options="dept for dept in departments">
+          <!-- if we want to bind this, must put this inside the scope (inside Controller), when in the scope we can use ng-options in some kind of for each loop
+
+            <option>Engineering</option>
+            <option>Marketing</option>
+            <option>Finance</option>
+            <option>Administration</option>
+            -->
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date" class="col-sm-3 control-label">Geburtstag Tag</label>
+      <div class="col-sm-9">
+        <datepicker name="date" ng-model="editableEmployee.dtStart" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="timePicker" class="col-sm-3 control-label">Geburtstag Zeit</label>
+      <div class="col-sm-9">
+        <timepicker name="timePicker" ng-model="editableEmployee.dtTime" hour-step="1" minute-step="1" show-meridian="ismeridian"></timepicker>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="typeahead" class="col-sm-3 control-label">Programming Languages</label>
+      <div class="col-sm-9">
+        <!--programmingLanguages is static array in Controller, $viewValue value from user-->
+        <input name="typeahead" type="text" ng-model="editableEmployee.topProgrammingLanguage" typeahead="topProgrammingLanguage for topProgrammingLanguage in programmingLanguages | filter:$viewValue | limitTo:8" class="form-control">
+      </div>
+    </div>
+
+    <br />
+
+    <fieldset>
+      <legend>Perks</legend>
+      <div class="form-group">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+
+          <div class="checkbox">
+            <label><input type="checkbox" value="perkCar" ng-model="editableEmployee.perkCar" />Company Car</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="perkStock" ng-model="editableEmployee.perkStock" />Stock Options</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="perkSixWeeks" ng-model="editableEmployee.perkSixWeeks" />Six Weeks Vacation</label>
+          </div>
+
+        </div>
+      </div>
+    </fieldset>
+    <br />
+
+    <fieldset>
+      <legend>Payroll Type</legend>
+      <div class="form-group">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+          <!--Angular will compare value attribute with variable editableEmployee.payroolType and her value for eg. editableEmployee.payroolType = 'none' then 'None for shure' will be selected -->
+          <div class="radio">
+            <label><input type="radio" name="payrollType" value="w2" ng-model="editableEmployee.payroolType" /> W-2 model</label><br />
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="payrollType" value="ten99" ng-model="editableEmployee.payroolType" /> 1099</label><br />
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="payrollType" value="none" ng-model="editableEmployee.payroolType" /> None for shure</label><br />
+          </div>
+
+          <br />
+
+        </div>
+      </div>
+    </fieldset>
+    <div class="col-sm-offset-3 col-sm-9">
+
+      <!--ng-submit placed on form tag, specify a callback function on usally on scope object, this will prevent default behavior of post back, () because we call function on scope-->
+      <!--ng-click placed on the button input control, only one ng-click or ng-submit can exist on page, if is more we have double click on page-->
+      <!--style from bootstrap btn btn-primary-->
+      <input type="button" class="btn btn-default" value="Cancel"
+             ng-click="cancelForm()" />
+      <input type="submit" class="btn btn-primary" value="Submit"
+             ng-click="submitForm()" />
+    </div>
+
+  </fieldset>
+</form>

@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body ng-app="app">
+
+    <div style="background-color: lightyellow">
+        REPEAT OLD STUFF HERE
+        <div ng-controller="scopeCtrl">
+
+            <span ng-bind="testMessage"></span>
+
+
+            <div ng-repeat="model in models" class="col-md-12">
+                {{ model.name }}
+            </div>
+            <br />
+            <input type="button" ng-click="testButton()" class="btn btn-primary" value="Test" />
+        </div>
+
+    </div>
+
+    <script src="../Scripts/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="scopeCtrl.js"></script>
+    <script src="scopeSrvc.js"></script>
+
+</body>
+</html>

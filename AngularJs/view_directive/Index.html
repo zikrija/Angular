@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body ng-app="app">
+    <!--we use data if we want to validate html-->
+    <!--if we not use this div we will have only this directive shown-->
+    <div>
+        <sc-basic-directive />
+    </div>
+    
+
+    <div ng-controller="basicCtrl">
+        <sc-basic-directive-with-ctrl />
+    </div>
+
+
+    <sc-link>{{ titleBasicLink }}</sc-link>
+    <hr />
+
+    <div ng-controller="linkCtrl">
+        {{ test1 }}
+
+        <sc-link-ext>
+            <div ng-repeat="val in values">
+                {{ title }}
+                <span style="color: Red">{{ val }}</span>
+            </div>
+        </sc-link-ext>
+
+        <hr />
+    </div>
+
+    <div ng-controller="peopleCtrl">
+        <my-people info="naomi" number="1"></my-people>
+        <br />
+        <my-people info="igor" number="2"></my-people>
+    </div>
+
+    <hr />
+    <sc-basic-directive />
+    <p>This is not exist after call directive, and hr must be in template</p>
+
+    <script src="../Scripts/angular.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

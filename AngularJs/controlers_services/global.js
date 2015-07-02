@@ -1,0 +1,3 @@
+﻿var globalData = {
+    data: 'global'
+};

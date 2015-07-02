@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html ng-app="appMain">
+<body>
+    <div ng-controller="registrationCtrl">
+
+        <h1>Available Classes</h1>
+        <div ng-repeat="c in availableClasses">
+            {{c.name}} <button ng-click="scheduleSC.addClass(c)">Register</button>
+        </div>
+
+        <h1>Your Schedule</h1>
+        <div ng-repeat="n in scheduleSC.classes">
+            {{n.name}} <button ng-click="scheduleSC.dropClass(n)">Drop</button>
+        </div>
+
+    </div>
+
+    <script src="../Scripts/angular.js"></script>
+    <script src="factoryCtrl.js"></script>
+    <script src="factorySrvc.js"></script>
+</body>
+</html>

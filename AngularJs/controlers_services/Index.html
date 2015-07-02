@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body ng-app="app">
+
+    <div ng-controller="schedulerCtrl">
+        {{ test }} <br />
+        {{ test1 }} <br />
+        {{ textFromService }}<br />
+        {{ factoryService }} <br />
+        {{ factoryProvider }}
+    </div>
+    
+    <div>
+        <div ng-controller="classCtrl">
+            Filter <br />
+            <div ng-repeat="class in availableClasses">
+                <!--Angular take this word then add word Filter and call then services ratingsFilter on controller in schedulerSrvc-->
+                <button ng-click="schedulerSrvc.addClass(class)">Register</button> {{ class.name }} rating: {{ class.rating | raitnings }}
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="../Scripts/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="schedulerCtrl.js"></script>
+    <script src="schedulerSrvc.js"></script>
+    <script src="global.js"></script>
+</body>
+</html>
